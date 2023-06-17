@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,15 +32,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # My apps 
+    'core',
+    'room',
+    'daphne',
+
+    # Third-party apps
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'core',
-    'channels',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +62,9 @@ ROOT_URLCONF = 'chat_website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,7 +78,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'chat_website.wsgi.application'
-ASGI_APPLICATION = 'chat_website.asgi_application'
+ASGI_APPLICATION = 'chat_website.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    }
+}
 
 
 # Database
