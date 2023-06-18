@@ -12,18 +12,27 @@
             <div class="w-full lg:w-1/4 px-3 py-3">
                 <div class="p-4 bg-white shadow rounded-xl text-center">
                     <h2 class="mb-5 text-2xl font-semibold"> {{ room }} </h2>
-                    <a href="{% url 'room_detail' room.slug %}" class="px-5 py-3 block rounded-xl text-white bg-teal-600 hover:bg-teal-700">Join</a>
-
-                </div>
-            </div>
-        {% empty %}
-            <div class=" xl:ml-[37vw] w-full xl:w-1/4 px-3 py-3 items-center justify-self-center">
-                <div class="p-4 bg-teal-400 shadow rounded-xl text-center border-2 border-teal-950">
-                    <h2 class="mb-5 text-2xl font-semibold text-teal-950"> No rooms available. </h2>
-                    <a href="#" class="px-5 py-3 block rounded-xl text-white bg-teal-600 hover:bg-teal-700">Create Room</a>
-            
+                    <div class="flex justify-center items-center space-x-2">
+                        <a href="{% url 'room_detail' room.slug %}" class="w-1/2 px-5 py-3 rounded-xl text-white bg-teal-600 hover:bg-teal-700">Join</a>
+                        <a href="{% url 'room_delete' room.slug %}" class="w-1/2 px-5 py-3 rounded-xl text-white bg-red-800 hover:bg-red-900">Delete</a>
+                    </div>          
                 </div>
             </div>
         {% endfor %}
+        {% if rooms %}
+            <div class="w-full lg:w-1/4 px-3 py-3 items-center justify-self-center">
+                <div class="p-4 bg-teal-400 shadow rounded-xl text-center border-2 border-teal-950">
+                    <h2 class="mb-5 text-2xl font-semibold text-teal-950"> Create new room </h2>
+                    <a href="{% url 'room_create'%}" class="px-5 py-3 block rounded-xl text-white bg-teal-600 hover:bg-teal-700">Create Room</a>
+                </div>
+            </div>
+        {% else %}
+            <div class=" xl:ml-[37vw] w-full xl:w-1/4 px-3 py-3 items-center justify-self-center">
+                <div class="p-4 bg-teal-400 shadow rounded-xl text-center border-2 border-teal-950">
+                    <h2 class="mb-5 text-2xl font-semibold text-teal-950"> No rooms available. </h2>
+                    <a href="{% url 'room_create'%}" class="px-5 py-3 block rounded-xl text-white bg-teal-600 hover:bg-teal-700">Create Room</a>
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock content %}

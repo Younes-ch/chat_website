@@ -1,0 +1,18 @@
+{% extends 'base/layout.html' %}
+
+{% block title %} Create Room {% endblock title %}
+
+{% block content %}
+<div class="p-10 lg:p-20 text-center">
+    <h1 class="text-3xl lg:text-6xl text-white">Create Room</h1>
+</div>
+<form action="{% url 'room_create' %}" method="post" class="lg:w-1/4 px-4 mx-auto">
+    {% csrf_token %}
+    <div class="mb-5">
+        {{ form }}
+    </div>
+
+    <input type="submit" value="Create" class="w-full px-5 py-3 rounded-xl text-white bg-teal-800 hover:bg-teal-700">
+
+</form>
+{% endblock content %}
